@@ -11,6 +11,6 @@ public class PersonalController {
 
     @GetMapping
     public String getBook(){
-            return "APi teste executado com sucesso123";
+            return "APi teste executado com sucesso";
     }
 }
