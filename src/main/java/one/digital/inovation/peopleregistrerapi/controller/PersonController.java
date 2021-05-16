@@ -17,22 +17,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 import java.util.List;
-    @RestController
-    public class PersonController {
+@RestController
+@RequestMapping("/api/v1/people")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+public class PersonController {
 
-        private PersonService personService;
-        @GetMapping("api/v1/people")
-        public String getTest(){
-            return "<h1>Teste executado com sucessos!!!</h1>";
-        }
-        @PostMapping
+    private PersonService personService;
+
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO create(@RequestBody @Valid PersonDTO personDTO) {
-        return personService.create(personDTO);
+    public MessageResponseDTO createPerson(@RequestBody  PersonDTO personDTO) {
+        return personService.createPerson(personDTO);
+    }
+    @GetMapping
+    public List<PersonDTO> listAll() {
+        return personService.listAll();
     }
 
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
+        return personService.findById(id);
     }
+
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody  PersonDTO personDTO) throws PersonNotFoundException {
+        return personService.updateById(id, personDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
+        personService.delete(id);
+    }
+
+}
 
