@@ -26,7 +26,7 @@ import java.util.List
         private PersonService personService;
         @GetMapping("api/v1/people")
         public String getTest(){
-            return "<h1>Teste executado com sucesso</h1>";
+            return "<h1>Teste executado com sucessos!!!</h1>";
         }
         @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
