@@ -31,10 +31,10 @@ import java.util.List;
             return "<h1>Teste executado com sucesso</h1>";
         }
         @PostMapping
-        @ResponseStatus(HttpStatus.CREATED)
-        public MessageResponseDTO createPerson(@RequestBody Person person) {
-            return personService.createPerson(person);
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO create(@RequestBody @Valid PersonDTO personDTO) {
+        return personService.create(personDTO);
+    }
 
     }
 
